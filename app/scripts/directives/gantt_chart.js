@@ -8,31 +8,8 @@ angular.module('someTestApp')
 			scope: {
 				data: '='
 			},
-			controller: function($scope, $element) {
-				$scope.getSunday = function() {
-					var currentDay = new Date(),
-						sundayDate = currentDay.getDate() - currentDay.getDay(),
-						tempDate = new Date();
-
-					tempDate.setDate(sundayDate);
-
-					return new Date(tempDate);
-				};
-
-				$scope.getDatesOfTheWeek = function(sunday) {
-					var startDate = sunday,
-						dates = [
-							new Date(startDate)
-						];
-
-					for (var i = 0; i < 6; i++) {
-						dates.push(new Date(startDate.addDays(1)));
-					}
-
-					return dates;
-				};
-
-				$scope.datesOfTheWeek = $scope.getDatesOfTheWeek($scope.getSunday());
+			controller: function($scope, $element, Calendar) {
+				$scope.datesOfTheWeek = Calendar.getDatesOfTheWeek(Calendar.getSunday());
 				$scope.weekInfo = [];
 
 				$scope.initWeekInfo = function() {
